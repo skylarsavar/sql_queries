@@ -1,0 +1,31 @@
+# Find the top 10 most popular cars and trims. Before doing that, make sure data is clean.
+
+#1. Inspect the fuel_type column for errors
+SELECT  
+  DISTINCT fuel_type
+FROM `zeta-time-396120.cars.car_info` 
+LIMIT 1000
+
+#2. Inspect length column
+SELECT  
+  MIN(length) AS min_length,
+  max(length) AS max_length
+FROM `zeta-time-396120.cars.car_info` 
+
+#3. Check for null values in num_of_doors column
+SELECT
+  *
+FROM 
+  `zeta-time-396120.cars.car_info`
+WHERE
+  num_of_doors IS NULL
+
+#4. Update the table so that all Dodge gas sedans have four doors
+UPDATE
+  `zeta-time-396120.cars.car_info` 
+SET
+  num_of_doors = "four"
+WHERE
+  make = "dodge"
+  AND fuel_type = "gas"
+  AND body_style = "sedan"
