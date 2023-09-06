@@ -1,0 +1,35 @@
+# A Marketing team wants to write a blog post celebrating their most used bike on being so popular. 
+They want to include the name of the staion that the bike is most likley to be found.
+
+
+#1. Figure out the station from which the bike begins a trip most frequently
+WITH 
+  longest_used_bike AS(
+  SELECT
+    bikeid,
+    SUM(duration_minutes) AS trip_duraiton
+  FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations`
+  GROUP BY 
+    bikeid
+  ORDER BY 
+    trip_duration desc
+  LIMIT 1
+)
+
+## find station at which longest bikeshare ride started
+SELECT
+  trips.start_station_id,
+  COUNT(*) AS trip_ct
+FROM 
+  longest_used_bike AS longest
+INNER JOIN 
+  `bigquery-public-data.austin_bikeshare.bikeshare_stations` AS trips
+ON longest.bikeid = trips.bikeid
+GROUP BY 
+  trips.start_station_id
+ORDER BY 
+  trip_ct desc
+LIMIT 1
+
+In this query I began with a temporary table to find the bike_id that corresponds to the most used bike. From that temporary table I then joined the Temporary Table with
+the original table to return the Station ID with the highest number of trips started. 
