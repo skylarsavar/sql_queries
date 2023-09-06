@@ -1,0 +1,23 @@
+#1. Find the total number of views by category.
+SELECT sum(video_views), category
+FROM `idyllic-analyst-397320.YouTube_statistics.youtube` 
+GROUP BY category
+
+#2. Find the average number of subscribers for users with over 100 Million Views.
+SELECT avg(subscribers)
+FROM idyllic-analyst-397320.YouTube_statistics.youtube 
+WHERE video_views > 100000000 
+SELECT subscribers, video_views, youtuber
+FROM idyllic-analyst-397320.YouTube_statistics.youtube 
+ORDER BY subscribers desc, video_views desc
+LIMIT 10
+
+#3. Find the top 10 YouTubers with the highest subscriber count and view count.
+SELECT subscribers, video_views, youtuber
+FROM idyllic-analyst-397320.YouTube_statistics.youtube
+WHERE video_views > 0 
+ORDER BY subscribers desc, video_views desc
+LIMIT 10
+
+#4.Who are the top ten creators in each category.
+#5.What are the highest and lowest monthly earnings?
