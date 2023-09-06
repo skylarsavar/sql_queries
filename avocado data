@@ -18,3 +18,5 @@ FROM `zeta-time-396120.Avocado_data.Avocado_prices`
 #3. Find the total number of avocados sold
 SELECT sum(total_volume)
 FROM `zeta-time-396120.Avocado_data.Avocado_prices` 
+
+
