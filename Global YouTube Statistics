@@ -19,5 +19,11 @@ WHERE video_views > 0
 ORDER BY subscribers desc, video_views desc
 LIMIT 10
 
-#4.Who are the top ten creators in each category.
-#5.What are the highest and lowest monthly earnings?
+#4. What are the top ten most popular categories by subscriber count.
+SELECT max(subscribers) as num_of_subscribers, category
+FROM `idyllic-analyst-397320.YouTube_statistics.youtube` 
+GROUP BY category
+ORDER BY max(subscribers) desc
+LIMIT 10
+
+#5.What channel type gets the most views?
