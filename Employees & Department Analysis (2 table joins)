@@ -1,0 +1,13 @@
+#In this SQL, I'm querying a database with multiple tables in it to quantify statistics about employee and department data.
+
+#1. Get a list of employees with their department name, excluding any employee witout a department ID.
+SELECT 
+  employees.name AS employee_name,
+  employees.role AS employee_role,
+  departments.name AS department_name
+FROM zeta-time-396120.employee_data.employees
+INNER JOIN 
+  zeta-time-396120.employee_data.departments ON
+  employees.department_id = departments.department_id
+
+#2. 
