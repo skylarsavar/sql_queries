@@ -1,0 +1,16 @@
+# Goal is to find out the total number of bags of avocados sold on each date at each location using this data.
+
+#1. What percent of the total number of bags were small bags. Finding this might help stakeholders make decisions on how to package avocados or which size bag to run a sale on. 
+SELECT 
+  Date,
+  Region,
+  Total_Bags,
+  Small_Bags,
+  (Small_Bags / Total_Bags)* 100 as Small_Bags_Percent
+FROM `zeta-time-396120.Avocado_data.Avocado_prices` 
+WHERE 
+  Total_Bags <> 0
+
+#2. Find the total revenue for all bags sold
+SELECT sum(averageprice * total_bags) as total_revenue
+FROM `zeta-time-396120.Avocado_data.Avocado_prices` 
