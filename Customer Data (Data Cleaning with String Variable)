@@ -1,0 +1,32 @@
+# The store is hosting a giveaway for customers in certain cities. Use the database information to narrow down which customers are eligible
+Practice preparing and cleaning data
+
+#1. The company has a promotion for customers in Ohio, get the customer IDs of customers who live in Ohio
+SELECT
+  DISTINCT customer_id
+FROM 
+  customer_data.customer_address
+
+#2. Make sure all country codes have the same length after finding an error with country code length 3
+SELECT
+  country
+FROM 
+  customer_data.customer_address
+WHERE
+  LENGTH(country) > 2
+
+#3. From that query, filter out only American customers
+SELECT
+  DISTINCT customer_id
+FROM
+  customer_data.customer_address
+WHERE
+  SUBSTR(country, 1, 2) = 'US'
+
+#4. Get a list of all cutomer IDs of the customers who live in "OH" for Ohio
+SELECT
+  DISTINCT customer_id
+FROM 
+  customer_data.csutomer_address
+WHERE
+  TRIM(state) = 'OH'
