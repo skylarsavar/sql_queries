@@ -1,0 +1,40 @@
+# In this SQL, I'm querying a database with Weather data for the entire US. I will create a subset of the data in a separate table to answer questions for a local news station
+
+#1. Get the temperature, wind speed, and precipitation for station La Guardia and JFK, for everyday in 2020, in descending order by date, and ascending order by Station ID
+SELECT
+  stn,
+  date,
+IF(
+    temp = 9999.9,
+    NULL,
+    temp) AS temperature,
+IF(
+    wdsp = "999.9",
+    NULL,
+    CAST(wdsp AS Float64)) AS wind_speed,
+IF(
+    prcp = 99.99,
+    0,
+    prcp) AS precipitation 
+FROM 
+  bigquery-public-data.noaa_gsod_gsod2020
+WHERE
+  stn = "725030" -- La Guardia
+OR stn = "744860" -- JFK
+ORDERY BY 
+  date desc,
+  stn asc
+
+#2. Find the avergae temperature in June 2020 
+SELECT 
+  AVG(temperature)
+FROM `idyllic-analyst-397320.demos.nye_weather` 
+WHERE 
+  date BETWEEN '2020-06-01' AND '2020-06-30'
+
+#3. Find the average wind_speed in December 2020
+SELECT 
+  AVG(wind_speed)
+FROM `idyllic-analyst-397320.demos.nye_weather` 
+WHERE 
+  date BETWEEN '2020-12-01' AND '2020-12-31'
