@@ -1,0 +1,43 @@
+#In this SQl I'm querying a database with multiple tables in it to quantify statistics about Warehouse and Order data
+
+#1 How many orders were placed by state
+SELECT 
+  warehouse.state as state,
+  COUNT(distinct order_id) as num_orders
+FROM idyllic-analyst-397320.warehouse_orders.orders as orders
+JOIN 
+  idyllic-analyst-397320.warehouse_orders.warehouse as warehouse on orders.warehouse_id = warehouse.warehouse_id
+group by
+  warehouse.state
+
+#2 Calculate what percentage of the orders are fulfilled by each warehouse
+select
+  warehouse.warehouse_id,
+  CONCAT(warehouse.state, ':', warehouse.warehouse_alias) as warehouse_name,
+  COUNT(orders.order_id) as number_of_orders,
+  (select 
+    count(*)
+  from warehouse_orders.orders orders)
+  as total_orders,
+  CASE
+    when count(orders.order_id)/(select count(*) from warehouse_orders.orders orders) <= 0.20
+    then "fulfilled 0-20% of orders"
+    when count(orders.order_id)/(select count(*) from warehouse_orders.orders orders) > 0.20
+    and count(orders.order_id)/(select count(*) from warehouse_orders.orders orders) < 0.60
+    then "fulfilled 21-60% of order"
+    else "fulfilled more than 60% of orders"
+    end as fulfillment_summary
+from warehouse_orders.warehouse as warehouse
+left join warehouse_orders.order as orders
+  on orders.warehouse_id = warehouse.warehouse_id
+group by 
+  warehouse.warehouse_id,
+  warehouse_name
+having 
+  count(orders.order_id > 0)
+
+
+                  warehouse.warehouse_id,
+                    warehouse_name
+                    having 
+  count(orders.order_id) > 0
