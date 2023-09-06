@@ -1,0 +1,25 @@
+#In this SQL, I'm querying a database with multiple tables in it to quantify statistics about customer and order data.
+
+#1. Which many total sales were made?
+SELECT count(bottles_sold)
+FROM `bigquery-public-data.iowa_liquor_sales.sales` 
+
+#2. Which liquor was sold the most?
+SELECT item_description, count(bottles_sold),
+FROM `bigquery-public-data.iowa_liquor_sales.sales` 
+group by item_description
+order by count(bottles_sold) desc
+
+#3. What stores have sold the most gallons of liquor?
+SELECT store_name, sum(volume_sold_gallons)
+FROM `bigquery-public-data.iowa_liquor_sales.sales` 
+group by store_name
+order by sum(volume_sold_gallons) desc
+
+#4. What was the total revenue for each product sold?
+SELECT sum(bottles_sold*sale_dollars) as revenue, item_description
+FROM `bigquery-public-data.iowa_liquor_sales.sales` 
+group by item_description
+order by sum(bottles_sold*sale_dollars) desc
+
+
