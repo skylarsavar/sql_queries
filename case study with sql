@@ -1,0 +1,19 @@
+# Processing; involvesc leaning the data after confirming it is a good source. I chose BigQuery SQL to remove all Null values to make the file small enough to export to sheets,
+then exported them into RStudio to combine all of the data into one data frame to use for the analysis phase and additional cleaning it may need
+
+#1. Remove all null values from data set
+SELECT *
+FROM enhanced-casing-398800.Divvy_Trips_Data.Divvy_Trips_2019_Q2
+WHERE member_gender IS NOT NULL
+
+SELECT *
+FROM `enhanced-casing-398800.Divvy_Trips_Data.Divvy_Trips_2019_Q4` 
+WHERE gender IS NOT NULL AND birthyear IS NOT NULL
+
+SELECT *
+FROM `enhanced-casing-398800.Divvy_Trips_Data.Divvy_Trips_2019_Q3` 
+WHERE gender IS NOT NULL AND birthyear IS NOT NULL
+
+SELECT *
+FROM `enhanced-casing-398800.Divvy_Trips_Data.Divvy_Trips_2020_Q1` 
+WHERE end_lat IS NOT NULL AND end_lng IS NOT NULL
