@@ -26,4 +26,4 @@ GROUP BY category
 ORDER BY max(subscribers) desc
 LIMIT 10
 
-#5.What channel type gets the most views?
+
